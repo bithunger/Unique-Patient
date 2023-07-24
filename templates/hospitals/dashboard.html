@@ -1,0 +1,120 @@
+{% extends "master.html" %}
+{% block title %}Hospital Dashboard - Bangladesh's Smart Patient Managing & Uniquelization Service{% endblock %}
+
+{% block content %}
+
+<section class="h-admin container">
+    {% include "hospitals/admin_sidenav.html" %}
+
+    <div class="h-admin-content">
+        <div class="my-card">
+            <h4>Hospital Dashboard</h4>
+            <hr class="mb-5">
+
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <div style="background-color: #312C40" class="p-4 text-white">
+                        <h1>{{ patients }}</h1>
+                        <h6>Total Patient</h6>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div style="background-color: #312C40" class="p-4 text-white">
+                        <h1>{{ doctors }}</h1>
+                        <h6>Total Doctor</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% comment %} 
+<div class="profile">
+                    <form>
+                        <div class="mb-3 text-center">
+                            <img class="profile-img rounded-circle mb-3" src="/media/logo/hospital.jpg" alt=""><br>
+                            <input type="file" class="form-control" id="img" name="img">
+                        </div>
+                        <div class="row g-3 mb-3">
+                            <div class="col">
+                                <label for="t-d" class="form-label">My Doctors</label>
+                                <input disabled type="text" class="form-control" placeholder="5,0000">
+                            </div>
+                            <div class="col">
+                                <label for="t-p" class="form-label">My Patients</label>
+                                <input disabled type="text" class="form-control" placeholder="5,0000">
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="id" class="form-label">Unique ID</label>
+                            <input disabled name="id" type="text" class="form-control" id="id">
+                        </div>
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Hospital name</label>
+                            <input name="name" type="text" class="form-control" id="name">
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Hospital Email</label>
+                            <input name="email" type="text" class="form-control" id="email">
+                        </div>
+                        <div class="mb-3">
+                            <label for="dob" class="form-label">Stablish Date (d-m-y)</label>
+                            <input id="dob" type="text" class="form-control clickable input-md" id="dob">
+                        </div>
+                        <div class="mb-3">
+                            <label for="mobile" class="form-label">Contact number</label>
+                            <input name="mobile" type="text" class="form-control" id="mobile">
+                        </div>
+                        <div class="mb-3">
+                            <label for="about" class="form-label">About Hospital</label>
+                            <textarea name="about" id="about" class="form-control" cols="10" rows="4"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="services" class="form-label">Services</label>
+                            <textarea name="services" id="services" class="form-control" cols="10" rows="4"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="news" class="form-label">News</label>
+                            <textarea name="news" id="news" class="form-control" cols="10" rows="4"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="address" class="form-label">Address</label>
+                            <textarea name="address" id="address" class="form-control" cols="10" rows="4"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="map" class="form-label">Map</label>
+                            <input name="map" type="text" class="form-control" id="map">
+                        </div>
+                        <div class="row g-3 mb-3">
+                            <div class="col">
+                                <label for="fb" class="form-label">Facebook Link</label>
+                                <input name="fb" type="text" class="form-control">
+                            </div>
+                            <div class="col">
+                                <label for="web" class="form-label">Web-site Link</label>
+                                <input name="web" type="text" class="form-control">
+                            </div>
+                        </div>
+                        <button type="submit" class="rounded my-button">Submit</button>
+                    </form>
+                </div>
+{% endcomment %}

@@ -1,0 +1,96 @@
+{% extends "master.html" %}
+{% block title %}Appointment List - Bangladesh's Smart Patient Managing & Uniquelization Service{% endblock %}
+
+{% block content %}
+
+<section class="container h-admin">
+    {% include "hospitals/admin_sidenav.html" %}
+
+    <div class="h-admin-content">
+        <div class="my-card">
+            <div class="search-title">
+                <h4>Appointment List</h4>
+                <form class="d-flex">
+                    <input class="form-control me-2" type="search" placeholder="Name or ID" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
+            </div>
+            <hr class="mb-5">
+
+            <div class=" my-table">
+                <table class="table table-borderless">
+                    <thead>
+                        <tr>
+                            <th class="col-sm-1">S/N.</th>
+                            <th class="col-md-3">Patient</th>
+                            <th class="col-md-3">Doctor</th>
+                            <th class="col-md-2">Date & Time</th>
+                            <th class="col-md-1">Status</th>
+                            <th class="col-md-2">#</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                            {% if appointments %}
+                            {% for appointment in appointments %}
+                            {% if appointment.status == False %}
+                            <tr>
+                                <td scope="row">{{ forloop.counter }}</td>
+                                <td><span class="fw-bold">{{ appointment.user.user.first_name }} {{ appointment.user.user.last_name }}</span></td>
+                                <td>
+                                    <span class="fw-bold">{{ appointment.doctor.user.first_name }} {{ appointment.doctor.user.last_name }}</span>
+                                    <p class="pe-5"><span class="fw-bold">Specialty:</span> {{ appointment.doctor.specialty }}</p>
+                                </td>
+                                <td><span class="fw-bold">{{ appointment.day }} - {{ appointment.time }}</span></td>
+                                <td>
+                                    <form action="{% url 'appointment-status' appointment.id %}" method="POST">
+                                        {% csrf_token %}
+                                        <input type="checkbox" class="btn-check" name="status" id="status" checked autocomplete="off">
+                                        <button type="submit" class="btn btn-outline-info text-white rounded-pill">Unvisited</button>
+                                    </form>
+                                </td>
+                                <td><a href="{% url 'update-appointment' appointment.id %}"><button class="btn btn-success rounded p-2"><i class="fa-solid fa-user-pen"></i></button></a>
+                                    <a href="{% url 'delete-appointment' appointment.id %}"><button class="btn btn-danger rounded p-2"><i class="fa-solid fa-trash"></i></button></a>
+                                </td>
+                            </tr>
+                            {% endif %}
+                            {% endfor %}
+
+                            {% for appointment in appointments %}
+                            {% if appointment.status == True %}
+                            <tr>
+                                <td scope="row">{{ forloop.counter }}</td>
+                                <td><span class="fw-bold">{{ appointment.user.user.first_name }} {{appointment.user.user.last_name }}</span></td>
+                                <td>
+                                    <span class="fw-bold">{{ appointment.doctor.user.first_name }} {{ appointment.doctor.user.last_name }}</span>
+                                    <p class="pe-5"><span class="fw-bold">Specialty:</span> {{appointment.doctor.specialty }}</p>
+                                </td>
+                                <td><span class="fw-bold">{{ appointment.day }} - {{ appointment.time }}</span></td>
+                                <td>
+                                    <form action="{% url 'appointment-status' appointment.id %}" method="POST">
+                                        {% csrf_token %}
+                                        <input type="checkbox" class="btn-check" name="status" id="status" autocomplete="off">
+                                        <button type="submit" class="btn btn-outline-success text-white btn-success rounded-pill">Visited</button>
+                                    </form>
+                                </td>
+                                <td><a href="{% url 'update-appointment' appointment.id %}"><button class="btn btn-success rounded p-2"><i class="fa-solid fa-user-pen"></i></button></a>
+                                    <a href="{% url 'delete-appointment' appointment.id %}"><button class="btn btn-danger rounded p-2"><i class="fa-solid fa-trash"></i></button></a>
+                                </td>
+                            </tr>
+                            {% endif %}
+                            {% endfor %}
+                            {% else %}
+                            <tr>
+                                <td>
+                                    <p>No appoinment found</p>
+                                </td>
+                            </tr>
+                            {% endif %}
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
+</section>
+
+{% endblock %}

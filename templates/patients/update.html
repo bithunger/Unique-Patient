@@ -1,0 +1,67 @@
+{% extends "master.html" %}
+{% block title %}Patient Profile - Bangladesh's Smart Patient Managing & Uniquelization Service{% endblock %}
+{% load widget_tweaks %}
+{% block content %}
+
+<section class="container">
+
+    <div class="my-card mt-4 mb-3">
+        <h4>Patient Profile</h4>
+        <hr class="mb-5">
+
+        <div class="sign-form rounded border">
+            <form action="" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                    
+
+                    <div class="mb-3 text-center">
+                        {% if patient.profile_image %}
+                        <img class="profile-img rounded-circle mb-3"src="/media/{{ patient.profile_image }}" alt="{{ patient.user.username }}">
+                        {% else %}
+                        <img class="profile-img rounded-circle mb-3"src="/media/images/profile.jpg" alt="Patient image"><br>
+                        {% endif %}
+                        <input type="file" class="form-control" id="img" name="img">
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input disabled type="text" name="username" class="form-control" placeholder="username" value="{{ patient.user.username }}">
+                        <label for="username">Username</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="text" name="first_name" class="form-control" placeholder="first_name" value="{{ patient.user.first_name }}">
+                        <label for="first_name">First name</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="text" name="last_name" class="form-control" placeholder="last_name" value="{{ patient.user.last_name }}">
+                        <label for="last_name">Last name</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="email" name="email" class="form-control" placeholder="email" value="{{ patient.user.email }}">
+                        <label for="email">Email</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input disabled type="text" name="gender" class="form-control" placeholder="gender" value="{{ patient.gender }}">
+                        <label for="gender">Gender</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input disabled type="text" name="dob" class="form-control" placeholder="dob" value="{{ patient.dob }}">
+                        <label for="dob">DOB</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="text" name="telephone_number" class="form-control" placeholder="telephone_number" value="{{ patient.telephone_number }}">
+                        <label for="telephone_number">Telephone number</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="text" name="address" class="form-control" placeholder="address" value="{{ patient.address }}">
+                        <label for="address">Address</label>
+                    </div>
+                    <div class="text-end">
+                        <button type="submit" class="btn btn-primary">Update</button>
+                    </div>
+            </form>
+
+        </div>
+    </div>
+
+</section>
+
+{% endblock %}

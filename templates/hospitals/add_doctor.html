@@ -1,0 +1,61 @@
+{% extends "master.html" %}
+{% block title %}Add Doctor - Bangladesh's Smart Patient Managing & Uniquelization Service{% endblock %}
+{% load widget_tweaks %}
+{% block content %}
+
+<section class="container h-admin">
+    {% include "hospitals/admin_sidenav.html" %}
+    
+    <div class="h-admin-content">
+        <div class="my-card">
+            <h4>Add Doctor</h4>
+            <hr class="mb-5">
+
+
+                <div class="sign-form rounded border">
+                    <form method="POST">
+                        {% csrf_token %}
+                        <div class="form-floating mb-3">
+                            <select name="doctor" class="form-select form-control form-select-sm" aria-label=".form-select-sm example">
+                                <option selected>None</option>
+                                {% if doctors %}
+                                {% for doctor in doctors %}
+                                <option value="{{ doctor.user.id }}">{{ doctor.user.first_name }} {{ doctor.user.last_name }} ({{ doctor.user.username }})</option>
+                                {% endfor %}
+                                {% else %}
+                                {% endif %}
+                            </select>
+                            <label for="doctor">Select doctor</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <select name="day" class="form-select form-control form-select-sm" aria-label=".form-select-sm example">
+                                <option selected>None</option>
+                                <option value="Saturday">Saturday</option>
+                                <option value="Sunday">Sunday</option>
+                                <option value="Monday">Monday</option>
+                                <option value="Tuesday">Tuesday</option>
+                                <option value="Wednesday">Wednesday</option>
+                                <option value="Thursday">Thursday</option>
+                                <option value="Friday">Friday</option>
+                            </select>
+                            <label for="day">Select day</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" name="time_from" class="form-control" placeholder="time_from">
+                            <label for="time_from">Time from</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" name="time_to" class="form-control" placeholder="time_to">
+                            <label for="time_to">Time to</label>
+                        </div>
+                        <div class="text-end">
+                            <button type="submit" class="my-button btn btn-primary">Save</button>
+                        </div>
+                    </form>
+                </div>
+        </div>
+    </div>
+
+</section>
+
+{% endblock %}

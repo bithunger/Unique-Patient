@@ -1,0 +1,198 @@
+{% extends "master.html" %}
+{% block title %}Appointment Update - Bangladesh's Smart Patient Managing & Uniquelization Service{% endblock %}
+{% load widget_tweaks %}
+{% block content %}
+
+<section class="container h-admin">
+    {% include "hospitals/admin_sidenav.html" %}
+    
+    <div class="h-admin-content">
+        <div class="my-card">
+            <div class="search-title">
+                <h4>Patient Update</h4>
+                <a class="text-black" href="{% url 'appointments' %}"><i class="fa-solid fa-arrow-left-long"></i> Go back</a>
+            </div>
+            <hr class="mb-5">
+
+            <div>
+                <div class="row g-4">
+                    <div class="col-md-6">
+                        <h5>Patient name- {{ appointment.user.user.first_name }} {{ appointment.user.user.last_name }}</h5>
+                        <p>Disease Description- {{ disease.disease_des }}</p>
+                        <h6>DOB- {{ appointment.user.dob }}</h6>
+                        <h6>Address- {{ appointment.user.address }}</h6>
+                        <h6>Contact- {{ appointment.user.telephone_number }}</h6>
+                    </div>
+                    <div class="col-md-6">
+                        <h6>Hospital- {{ appointment.hospital.hospital_name }}</h6>
+                        <h6>Doctor- {{ appointment.doctor.user.first_name }} {{ appointment.doctor.user.last_name }}</h6>
+                        <p>Specialty- {{ appointment.doctor.specialty }}</p>
+                    </div>
+                </div>
+
+                <div class="mt-5">
+                    {% comment %} <div>
+                        <div class="mb-5">
+                            <div class="mb-3">
+                                <h5>Medicines</h5>
+                            </div>
+                            <form method="POST" enctype="multipart/form-data" class="mb-3">
+                                {% csrf_token %}
+                                <div class="row">
+                                    <div class="col-9">
+                                        <input type="text" name="medicine" class="form-control">
+                                    </div>
+                                    <div class="col-3">
+                                        <button type="submit" class="btn btn-primary">Add</button>
+                                    </div>
+                                  </div>
+                            </form>
+                            <table class="table table-borderless table-striped">
+                                <tbody>
+                                    {% if medicines %}
+                                    {% for medicine in medicines %}
+                                    <tr>
+                                        <td scope="row">Rx.</td>
+                                        <td>{{ medicine.medicine_name }}</td>
+                                        <td>{{ medicine.times_in_day }} p. day</td>
+                                        <td>{{ medicine.continuing_days }} days</td>
+                                    </tr>
+                                    {% endfor %}
+                                    {% else %}
+                                    <p>No medicine found</p>
+                                    {% endif %}
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="mb-5">
+                            <div class="mb-3">
+                                <h5>Suggestions</h5>
+                            </div>
+                            <form method="POST" enctype="multipart/form-data" class="mb-3">
+                                {% csrf_token %}
+                                <div class="row">
+                                    <div class="col-9">
+                                        <input type="text" name="medicine" class="form-control">
+                                    </div>
+                                    <div class="col-3">
+                                        <button type="submit" class="btn btn-primary">Add</button>
+                                    </div>
+                                  </div>
+                            </form>
+                            <div>
+                                {% if suggestions %}
+                                {% for suggestion in suggestions %}
+                                    <p><span><i class="fa-sharp fa-solid fa-circle-info"></i></span> {{ suggestion.suggestion_des }}</p>
+                                {% endfor %}
+                                {% else %}
+                                <p>No suggestions</p>
+                                {% endif %}
+                            </div>
+                        </div>
+    
+                        <div class="mb-5">
+                            <div class="mb-3">
+                                <h5>Exercises</h5>
+                            </div>
+                            <form method="POST" enctype="multipart/form-data" class="mb-3">
+                                {% csrf_token %}
+                                <div class="row">
+                                    <div class="col-9">
+                                        <input type="text" name="medicine" class="form-control">
+                                    </div>
+                                    <div class="col-3">
+                                        <button type="submit" class="btn btn-primary">Add</button>
+                                    </div>
+                                  </div>
+                            </form>
+                            <div>
+                                {% if exercises %}
+                                {% for exercise in exercises %}
+                                    <p><span><i class="fa-sharp fa-solid fa-circle-info"></i></span> {{ exercise.exercise_des }}</p>
+                                {% endfor %}
+                                {% else %}
+                                <p>No exercise need</p>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="mb-5">
+                            <div class="mb-3">
+                                <h5>Note</h5>
+                            </div>
+                            <form method="POST" enctype="multipart/form-data" class="mb-3">
+                                {% csrf_token %}
+                                <div class="row">
+                                    <div class="col-9">
+                                        <input type="text" name="medicine" class="form-control">
+                                    </div>
+                                    <div class="col-3">
+                                        <button type="submit" class="btn btn-primary">Add</button>
+                                    </div>
+                                </div>
+                            </form>
+                            <div>
+                                {% if continues %}
+                                {% for continue in continues %}
+                                <p><span><i class="fa-sharp fa-solid fa-circle-info"></i></span> Need to continue- {{ continue.continuing_days }} days</p>
+                                <p><span><i class="fa-sharp fa-solid fa-circle-info"></i></span> Come again after {{ continue.come_after }} days later</p>
+                                {% endfor %}
+                                {% else %}
+                                <p>No note here</p>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div> {% endcomment %}
+
+                    <div class="mb-3">
+                        <div class="mb-3">
+                            <h5>Tests</h5>
+                        </div>
+                        <table class="table table-borderless table-striped">
+                            <thead>
+                                <tr>
+                                    <th class="col-sm-1">S/N.</th>
+                                    <th class="col-md-4">Test name</th>
+                                    <th class="col-md-5">View</th>
+                                    <th class="col-md-2">Add</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% if tests %}
+                                {% for test in tests %}
+                                <tr>
+                                    <td scope="row">{{ forloop.counter }}</td>
+                                    <td>{{ test.test_name }}</td>
+                                    <td>
+                                        <a href="{% if test.test_report %}{{ test.test_report.url }}{% else %}#{% endif %}">{{ test.test_report }}</a>
+                                    </td>
+                                    <td>
+                                        <form action="" method="POST" enctype="multipart/form-data">
+                                            {% csrf_token %}
+                                            <div class="row">
+                                                <div class="col-8">
+                                                    <input type="file" name="test_report">
+                                                    <input type="text" name="id" value="{{ test.id }}" hidden>
+                                                </div>
+                                                <div class="col-4">
+                                                    <button type="submit" class="btn btn-info text-white rounded">Add</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                                {% else %}
+                                <p>No test</p>
+                                {% endif %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+            </div>
+
+        </div>
+
+</section>
+
+{% endblock %}

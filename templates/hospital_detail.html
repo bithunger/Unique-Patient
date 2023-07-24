@@ -1,0 +1,86 @@
+{% extends "master.html" %}
+{% block title %}Make Appointments - Bangladesh's Smart Patient Managing & Uniquelization Service{% endblock %}
+
+{% block content %}
+
+<section class="container">
+
+    <div class="my-card mt-4">
+        <div class="search-title">
+            <h4>{{ hospital.hospital_name }}</h4>
+        </div>
+        <hr class="mb-5">
+
+        <div>
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <img src="/media/images/profile.jpg" alt="">
+                </div>
+                <div class="col-md-6">
+                    <h6><span class="fw-bold">About-</span> {{ hospital.hospital_about }}</h6>
+                    <h6><span class="fw-bold">Establish-</span> {{ hospital.establish }}</h6>
+                    <h6><span class="fw-bold">Address-</span> {{ hospital.address }}</h6>
+                    <h6><span class="fw-bold">Telephone-</span> {{ hospital.telephone_number }}</h6>
+                    <h6><span class="fw-bold">Email-</span> {{ hospital.user.email }}</h6>
+                    <h6><span class="fw-bold">Map-</span> {{ hospital.hospital_map }}</h6>
+                    <h6><span class="fw-bold">Fb-link-</span> {{ hospital.hospital_fb }}</h6>
+                    <h6><span class="fw-bold">Web-site-</span> {{ hospital.hospital_web }}</h6>
+                </div>
+            </div>
+            <div class="row g-4 mt-5">
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <h5>Services</h5>
+                    </div>
+                    {% if services %}
+                    {% for service in services %}
+                    <div class="card text-center" style="width: 18rem;">
+                        <div class="card-body">
+                          <p class="card-title">{{ service.service_title }}</p>
+                        </div>
+                    </div>                    
+                    {% endfor %}
+                    {% else %}
+                    <p>No services</p>
+                    {% endif %}
+                </div>
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <h5>News</h5>
+                    </div>
+                    {% if newses %}
+                    {% for news in newses %}
+                    <p><span><i class="fa-sharp fa-solid fa-circle-info"></i></span> {{ news.news_title }}</p>                  
+                    {% endfor %}
+                    {% else %}
+                    <p>No news</p>
+                    {% endif %}
+                    
+                </div>
+            </div>
+
+            <div class="mt-5">
+                <div class="mb-3">
+                    <h5>Doctors</h5>
+                </div>
+                <div class="row">
+                    {% for doctor in doctors %}
+                    <div class="col-md-3">
+                        <a class="m-3" href="{% url 'appointment-checkout' hospital.slug doctor.my_doctor.user.id %}">
+                            <div class="card" style="width: 18rem;">
+                                <div class="card-body">
+                                <h5 class="card-title">{{ doctor.my_doctor.user.first_name }} {{ doctor.my_doctor.user.last_name }}</h5>
+                                <p class="card-text">{{ doctor.my_doctor.specialty }}</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+{% endblock %}

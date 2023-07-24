@@ -1,0 +1,89 @@
+{% extends "master.html" %}
+{% block title %}Make Appointments - Bangladesh's Smart Patient Managing & Uniquelization Service{% endblock %}
+
+{% block content %}
+
+<section class="container h-admin">
+    {% include "hospitals/admin_sidenav.html" %}
+
+
+    <div class="h-admin-content">
+        <div class="my-card mt-4">
+            <div class="search-title">
+                <h4>Doctor detail</h4>
+            </div>
+            <hr class="mb-5">
+
+            <div>
+                <div class="row g-4">
+                    <div class="col-md-6 pe-4">
+                        {% if doctor.my_doctor.profile_image %}
+                        <img class="mb-4" src="/media/{{ doctor.my_doctor.profile_image }}" alt="{{ doctor.my_doctor.user.username }}"  width="100">
+                        {% else %}
+                        <img class="mb-4" src="/media/images/profile.jpg" alt="" width="100">
+                        {% endif %}
+                        
+                        <h6><span class="fw-bold">{{ doctor.my_doctor.user.first_name }} {{ doctor.my_doctor.user.last_name }}</span></h6>
+                        <h6><span class="fw-bold">Qualification-</span> {{ doctor.my_doctor.qualification }}</h6>
+                        <h6><span class="fw-bold">Specialty-</span> {{ doctor.my_doctor.specialty }}</h6>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="my-table">
+                            <table class="table table-borderless">
+                                <thead>
+                                <tr>
+                                    <th class="col-md-2">Available</th>
+                                    <th class="col-md-3">Day</th>
+                                    <th class="col-md-3">Appointments</th>
+                                    <th class="col-md-2">Status</th>
+                                    <th class="col-md-2">
+                                        <a href="{% url 'doctor-add-time' doctor.my_doctor.user.slug %}"><span class="badge bg-primary text-wrap">Add Date</span></a>
+                                    </th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% if times %}
+                                {% for time in times %}
+                                    <tr>
+                                        <td><span class="fw-bold">{{ time.day }}</span></td>
+                                        <td><span class="fw-bold">{{ time.time_from }} to {{ time.time_to }}</span></td>
+                                        <td>
+                                            <span class="fw-bold"><a href="{% url 'date-wise-appointments' doctor.my_doctor.user.slug time.day %}">View</a></span>
+                                        </td>
+                                        <td><span class="fw-bold">{{ time.status }}</span></td>
+                                        <td><a href="{% url 'doctor-update' doctor.my_doctor.user.slug time.id %}"><span class="text-center bg-success text-white rounded p-2"><i class="fa-solid fa-user-pen"></i></span></a>
+                                            <a href=""><span class="text-center bg-danger text-white rounded p-2"><i class="fa-solid fa-trash"></i></span></a>
+                                        </td>
+                                        {% comment %} {% url 'date-wise-appointments' doctor.my_doctor.user.slug time.id %} {% endcomment %}
+                                    </tr>
+                                    {% endfor %}
+                                {% else %}
+                                <tr>
+                                    <td>
+                                        <p>No available time</p>
+                                    </td>
+                                </tr>
+                                {% endif %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+{% endblock %}
+
+
+
+
+            
+{% comment %} <div class="mt-5">
+    <div class="mb-3">
+        <h5>Appointments</h5>
+    </div>
+
+</div> {% endcomment %}

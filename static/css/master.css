@@ -1,0 +1,393 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+a {
+    text-decoration: none;
+    color: #312C40;
+}
+a:hover{
+    color: #0E9696 !important;
+}
+
+.active {
+    color: #0E9696 !important;
+    background-color: white;
+    /* border-radius: 5px;
+    box-shadow: 0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%);
+    background-color: #0E9696; */
+}
+
+.active:hover{
+    background-color: white;
+}
+
+ul {
+    padding: 0;
+    margin: 0;
+}
+
+li {
+    text-decoration: none;
+    list-style-type: none;
+    margin-bottom: 6px;
+}
+
+body {
+    color: #312C40;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+    font-size: 13px;
+    background-color: #F6F9FF;
+}
+
+.up-nav {
+    height: 36px;
+    background-color: #0E9696;
+    text-align: end;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    color: white;
+}
+
+nav {
+    background-color: #312C40;
+    box-shadow: 0 7px 10px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.navbar-brand,
+#navbarNav ul li a {
+    color: white;
+    font-weight: 500;
+}
+
+.navbar-collapse {
+    flex-grow: 0;
+}
+
+#navlogo {
+    border-radius: 50%;
+    margin-right: 5px;
+}
+
+.sign-form{
+    width: 450px;
+    margin: auto;
+    padding: 23px;
+}
+
+
+
+
+
+
+
+
+
+
+/*Body*/
+.company-moto {
+    padding-top: 40px;
+    height: 350px;
+    text-transform: uppercase;
+    font-size: 70px;
+    font-weight: 700;
+    color: #0E9696;
+}
+
+.company-moto div .d {
+    font-size: 50px;
+    color: #312C40;
+}
+
+.total-count {
+    background-color: #312C40;
+    color: white;
+    display: flex;
+    justify-content: space-evenly;
+    padding: 30px;
+    font-size: 16px;
+}
+
+.my-card {
+    padding: 40px 0px 40px 0px;
+    font-weight: 600;
+}
+
+.my-card .appointment img {
+    width: 20%;
+}
+
+.my-card .appointment button {
+    background-color: #0E9696;
+    padding: 12px;
+    border: none;
+    margin-top: 20px;
+    font-weight: 500;
+    color: white;
+}
+
+.my-button {
+    background-color: #0E9696;
+    color: white;
+    padding: 8px 12px 8px 12px;
+    border: none;
+    font-weight: 400;
+}
+
+.my-button:hover {
+    background-color: #56b0b0;
+    color: white;
+    padding: 8px 12px 8px 12px;
+    border: none;
+    font-weight: 400;
+}
+
+.partners-logo img {
+    width: 200px;
+    height: 200px;
+}
+
+.partners-logo {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+
+/* Footer */
+footer {
+    background-color: #312C40;
+    padding: 30px;
+    color: white;
+    font-size: 15px;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+}
+
+.moto img {
+    border-radius: 50%;
+    margin-bottom: 15px;
+}
+
+.my-box {
+    padding: 20px;
+    width: 300px;
+}
+
+.social ul {
+    font-size: 24px;
+}
+
+
+/* profile */
+.profile {
+    width: 60%;
+}
+
+.profile-img {
+    width: 170px;
+    height: 170px;
+}
+
+/* Appointment */
+.search-title {
+    display: flex;
+    justify-content: space-between;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 400px;
+}
+
+.sidebar nav {
+    height: 100%;
+    background-color: #0E9696;
+    position: relative;
+}
+
+.sidebar nav .list-group a {
+    color: #312C40;
+    font-weight: 500;
+    background-color: #0E9696;
+    border: none;
+}
+.sidebar nav .list-group{
+    border: #312C40;
+    border-color: #312C40;
+}
+
+.sidebar a:hover {
+    color: white !important;
+}
+
+.sidebar nav .list-group .active {
+    color: white !important;
+    background-color: #0E9696;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%);
+}
+
+/* H-admin */
+.h-admin {
+    display: flex;
+}
+
+.h-admin-content {
+    margin-left: 25px;
+    margin-top: 20px;
+    width: 100%;
+}
+
+/* About */
+.about-des {
+    font-size: 18px;
+    padding: 30px 0px 0px 0px;
+    text-align: center;
+}
+
+/* Contact-us */
+.contact {
+    width: 50%;
+}
+
+.my-table table td{
+    padding-top: 40px;
+}
+.my-table thead{
+    border-bottom: 1px solid;
+}
+
+
+
+
+
+/* Responsive */
+@media screen and (max-width: 576px) {
+
+    /*Body*/
+    .company-moto {
+        padding-top: 40px;
+        height: 210px;
+        text-transform: uppercase;
+        font-size: 40px;
+        font-weight: 700;
+        color: #0E9696;
+    }
+
+    .company-moto div .d {
+        font-size: 22px;
+        color: #312C40;
+    }
+
+    .total-count {
+        background-color: #312C40;
+        color: white;
+        display: block;
+        padding: 15px;
+        font-size: 13px;
+    }
+
+    .total-count .count {
+        padding-top: 15px;
+    }
+
+    .my-card {
+        padding: 15px;
+        font-weight: 500;
+    }
+
+    .my-card .appointment img {
+        width: 65%;
+    }
+
+    .my-card .appointment button {
+        background-color: #0E9696;
+        padding: 12px;
+        border: none;
+        margin-top: 20px;
+        font-weight: 500;
+    }
+
+    .partners-logo img {
+        width: 75px;
+        height: 75px;
+    }
+
+    .partners-logo {
+        justify-content: space-between;
+    }
+
+    .footer-content {
+        display: block;
+        text-align: center;
+    }
+
+    .my-box {
+        padding: 20px;
+        width: 100%;
+    }
+
+    .social ul {
+        display: flex;
+        justify-content: center;
+    }
+
+    .social ul li {
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+
+    .profile {
+        width: 100%;
+    }
+
+    .profile-img {
+        width: 130px;
+        height: 130px;
+    }
+
+    /* Appointment */
+    .search-title {
+        display: block;
+    }
+
+    /* H-admin */
+    .h-admin {
+        display: block;
+    }
+
+    .h-admin-content {
+        margin-left: 0px;
+        margin-top: 20px;
+        width: 100%;
+    }
+
+    /* About */
+    .about-des {
+        font-size: 13px;
+    }
+
+    /* Contact-us */
+    .contact {
+        width: 100%;
+    }
+
+    .name-flex {
+        display: block;
+    }
+
+    .copyright {
+        font-size: 12px;
+    }
+
+    .sign-form{
+        width: 100%;
+        margin: auto;
+        padding: 18px;
+    }
+}
+
+/* Brand sliding */

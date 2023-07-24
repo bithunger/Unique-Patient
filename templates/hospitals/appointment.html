@@ -1,0 +1,47 @@
+{% extends "master.html" %}
+{% block title %}Make Appointments - Bangladesh's Smart Patient Managing & Uniquelization Service{% endblock %}
+
+{% block content %}
+
+<section class="h-admin container">
+    {% include "hospitals/admin_sidenav.html" %}
+
+    <div class="h-admin-content">
+        <div class="my-card">
+            <div class="search-title">
+                <h4>Make Appointments</h4>
+                <form class="d-flex">
+                    <input class="form-control me-2" type="search" placeholder="Name or Username" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
+            </div>
+            <hr class="mb-5">
+
+            <div class="doctor-search mt-5">
+                <h5>Doctors</h5>
+                <div class="row">
+                    {% if doctors %}
+                    {% for doctor in doctors %}
+                    <div class="col-md-6 g-4">
+                        <a href="{% url 'h-appointment-checkout' doctor.my_doctor.user.id %}" class="">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title fw-bold">{{ doctor.my_doctor.user.first_name }} {{ doctor.my_doctor.user.last_name }}
+                                    </h5>
+                                    <p class="card-text"><span class="fw-bold">Specialty:</span> {{ doctor.my_doctor.specialty }}</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    {% endfor %}
+                    {% else %}
+                    <p>No doctor found</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+{% endblock %}

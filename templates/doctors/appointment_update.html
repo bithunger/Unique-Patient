@@ -1,0 +1,264 @@
+{% extends "master.html" %}
+{% block title %}Appointment Update - Bangladesh's Smart Patient Managing & Uniquelization Service{% endblock %}
+{% load widget_tweaks %}
+{% block content %}
+
+<section class="container">
+
+    <div class="my-card mt-4">
+        <div class="search-title">
+            <h4>Patient Update</h4>
+            <a class="text-black" href="{% url 'd-appointments' %}"><i class="fa-solid fa-arrow-left-long"></i> Go
+                back</a>
+        </div>
+        <hr class="mb-5">
+
+        <div>
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <h5><span class="fw-bold">Hospital-</span> {{ appointment.hospital.hospital_name }}</h5>
+                    <h5><span class="fw-bold">Patient name-</span> {{ appointment.user.user.first_name }} {{ appointment.user.user.last_name }}
+                    </h5>
+                    <h6><span class="fw-bold">DOB-</span> {{ appointment.user.dob }}</h6>
+                    <h6><span class="fw-bold">Address-</span> {{ appointment.user.address }}</h6>
+                    <h6><span class="fw-bold">Contact-</span> {{ appointment.user.telephone_number }}</h6>
+                </div>
+                <div class="col-md-6">
+                    <img src="/media/{{ appointment.user.profile_image }}" alt="{{ appointment.user.user.first_name }}" width="150">
+                </div>
+            </div>
+
+            <div class="mt-5">
+                <div>
+                    <div class="mb-5">
+                        <div class="mb-3">
+                            <h5>Disease</h5>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <form method="POST" class="mb-3">
+                                    {% csrf_token %}
+                                    <div class="form-floating mb-3">
+                                        <input type="text" name="disease_name" class="form-control" placeholder="disease_name"
+                                            value="{{ disease.disease_name  }}">
+                                        <label for="disease_name">Disease name</label>
+                                    </div>
+                                    <div class="form-floating mb-3">
+                                        <textarea name="disease_des" class="form-control" cols="30" rows="10"
+                                            placeholder="disease_des">{{ disease.disease_des  }}</textarea>
+                                        <label for="disease_des">Disease description</label>
+                                    </div>
+                                    <div class="text-end">
+                                        <button type="submit" class="btn btn-primary">Save</button>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="col">
+                                <table class="table table-borderless table-striped">
+                                    <tbody>
+                                        {% if diseases %}
+                                        {% for disease in diseases %}
+                                        <tr>
+                                            <td scope="row">{{ forloop.counter }}</td>
+                                            <td>{{ disease.disease_name }}</td>
+                                            <td>{{ disease.disease_des }}</td>
+                                        </tr>
+                                        {% endfor %}
+                                        {% else %}
+                                        <tr>
+                                            <td>No diseases</td>
+                                        </tr>
+                                        {% endif %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-5">
+                        <div class="mb-3">
+                            <h5>Medicines</h5>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <form method="POST" action="{% url 'add-medicine' appointment.id %}" class="mb-3">
+                                    {% csrf_token %}
+                                    <div class="">
+                                        <input type="text" name="medicine_name" class="form-control mb-2"
+                                            placeholder="Medicine name">
+                                        <input type="text" name="times_in_day" class="form-control mb-2"
+                                            placeholder="Time in days">
+                                        <input type="text" name="continuing_days" class="form-control mb-2"
+                                            placeholder="Total days">
+                                    </div>
+                                    <div class="text-end">
+                                        <button type="submit" class="btn btn-primary">Add</button>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="col text-center">
+                                <table class="table table-borderless table-striped">
+                                    <tbody>
+                                        {% if medicines %}
+                                        {% for medicine in medicines %}
+                                        <tr>
+                                            <td scope="row">Rx.</td>
+                                            <td>{{ medicine.medicine_name }}</td>
+                                            <td>{{ medicine.times_in_day }} p. day</td>
+                                            <td>{{ medicine.continuing_days }} days</td>
+                                        </tr>
+                                        {% endfor %}
+                                        {% else %}
+                                        <tr>
+                                            <td>No medicine</td>
+                                        </tr>
+                                        {% endif %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-5">
+                        <div class="mb-3">
+                            <h5>Tests</h5>
+                        </div>
+                        <div class="row">
+                            <div class="col text-center">
+                                <form method="POST" action="{% url 'add-test' appointment.id %}" class="mb-3">
+                                    {% csrf_token %}
+                                    <div class="row">
+                                        <div class="mb-2">
+                                            <input type="text" name="test_name" class="form-control">
+                                        </div>
+                                        <div class="text-end">
+                                            <button type="submit" class="btn btn-primary">Add</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="col text-center">
+                                <table class="table table-borderless table-striped">
+                                    <tbody>
+                                        {% if tests %}
+                                        {% for test in tests %}
+                                        <tr>
+                                            <td scope="row">{{ forloop.counter }}</td>
+                                            <td>{{ test.test_name }}</td>
+                                            <td>
+                                                <a href="{% if test.test_report %}{{ test.test_report.url }}{% else %}#{% endif %}">{{test.test_report }}</a>
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+                                        {% else %}
+                                        <tr>
+                                            <td>No test</td>
+                                        </tr>
+                                        {% endif %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-5">
+                        <div class="mb-3">
+                            <h5>Suggestions</h5>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <form method="POST" action="{% url 'add-suggestion' appointment.id %}" class="mb-3">
+                                    {% csrf_token %}
+                                    <div class="mb-2">
+                                        <input type="text" name="suggestion_des" class="form-control">
+                                    </div>
+                                    <div class="text-end">
+                                        <button type="submit" class="btn btn-primary">Add</button>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="col">
+                                <div>
+                                    {% if suggestions %}
+                                    {% for suggestion in suggestions %}
+                                    <p><span><i class="fa-sharp fa-solid fa-circle-info"></i></span> {{ suggestion.suggestion_des }}</p>
+                                    {% endfor %}
+                                    {% else %}
+                                    <p>No suggestions</p>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-5">
+                        <div class="mb-3">
+                            <h5>Exercises</h5>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <form method="POST" action="{% url 'add-exercise' appointment.id %}" class="mb-3">
+                                    {% csrf_token %}
+                                    <div class="mb-2">
+                                        <input type="text" name="exercise_des" class="form-control">
+                                    </div>
+                                    <div class="text-end">
+                                        <button type="submit" class="btn btn-primary">Add</button>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="col">
+                                <div>
+                                    {% if exercises %}
+                                    {% for exercise in exercises %}
+                                    <p><span><i class="fa-sharp fa-solid fa-circle-info"></i></span> {{ exercise.exercise_des }}</p>
+                                    {% endfor %}
+                                    {% else %}
+                                    <p>No exercise</p>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <div class="mb-3">
+                            <h5>Note</h5>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <form method="POST" action="{% url 'add-continue' appointment.id %}" class="mb-3">
+                                    {% csrf_token %}
+                                    <div class="mb-2">
+                                        <input type="text" name="continuing_days" class="form-control mb-2" placeholder="Continuing days">
+                                        <input type="text" name="come_after" class="form-control" placeholder="Come after">
+                                    </div>
+                                    <div class="text-end">
+                                        <button type="submit" class="btn btn-primary">Add</button>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="col">
+                                <div>
+                                    {% if continues %}
+                                    {% for continue in continues %}
+                                    <p><span><i class="fa-sharp fa-solid fa-circle-info"></i></span> Need to continue- {{ continue.continuing_days }} days</p>
+                                    <p><span><i class="fa-sharp fa-solid fa-circle-info"></i></span> Come again after {{ continue.come_after }} days later</p>
+                                    {% endfor %}
+                                    {% else %}
+                                    <p>No note</p>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

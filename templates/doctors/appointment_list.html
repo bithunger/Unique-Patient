@@ -1,0 +1,60 @@
+{% extends "master.html" %}
+{% block title %}Appointment List - Bangladesh's Smart Patient Managing & Uniquelization Service{% endblock %}
+
+{% block content %}
+
+<section class="container">
+        <div class="my-card mt-4">
+            <div class="search-title">
+                <h4>Appointment List</h4>
+                <form class="d-flex">
+                    <input class="form-control me-2" type="search" placeholder="Name or ID" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
+            </div>
+            <hr class="mb-5">
+
+            <div class=" my-table">
+                <table class="table table-borderless">
+                    <thead>
+                        <tr>
+                            <th class="col-sm-1">S/N.</th>
+                            <th class="col-md-4">Patient</th>
+                            <th class="col-md-4">Hospital</th>
+                            <th class="col-md-2">Status</th>
+                            <th class="col-md-1">#</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                            {% if appointments %}
+                            {% for appointment in appointments %}
+                            {% if appointment.status == True %}
+                            <tr>
+                                <td scope="row">{{ forloop.counter }}</td>
+                                <td><span class="fw-bold">{{ appointment.user.user.first_name }} {{appointment.user.user.last_name }}</span></td>
+                                <td>
+                                    <span class="fw-bold">{{ appointment.hospital.hospital_name }}</span>
+                                </td>
+                                <td>
+                                    <span class="bg-success text-white rounded-pill p-2">Visited</span>
+                                </td>
+                                <td><a href="{% url 'd-update-appointment' appointment.id %}"><span class="text-center bg-success text-white rounded p-2"><i class="fa-solid fa-user-pen"></i></span></a></td>
+                            </tr>
+                            {% endif %}
+                            {% endfor %}
+                            {% else %}
+                            <tr>
+                                <td>
+                                    <p>No appoinment found</p>
+                                </td>
+                            </tr>
+                            {% endif %}
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
+</section>
+
+{% endblock %}

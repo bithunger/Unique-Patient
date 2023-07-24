@@ -1,0 +1,97 @@
+{% include "up_nav.html" %}
+<nav class="navbar navbar-expand-lg">
+	<div class="container display-flex justofy-content-between">
+
+		<a class="navbar-brand" href="{% url 'home' %}">
+			<span><img id='navlogo' src="/media/logo/logo.png" alt="Logo" width='55'></span>Unique-Patient
+		</a>
+
+		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+			aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarNav">
+			<ul class="navbar-nav">
+				{% if request.user.is_authenticated %}
+					{% if request.user.is_patient %}
+						<li class="nav-item">
+							<a class="nav-link {% if request.path == '/patient/make-appointment/' %}active{% endif %}"
+								aria-current="page" href="{% url 'make-appointment' %}">Make appointmnet</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link {% if request.path == '/patient/appointment-list/' %}active{% endif %}"
+								aria-current="page" href="{% url 'p-appointment-list' %}">Appointmnets</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link {% if request.path == '/patient/disease-list/' %}active{% endif %}"
+								aria-current="page" href="{% url 'p-disease-list' %}">Diseases</a>
+						</li>
+					{% elif request.user.is_hospital %}
+						<li class="nav-item">
+							<a class="nav-link {% if request.path == '/hospital/dashboard/' %}active{% endif %}" aria-current="page"
+								href="{% url 'dashboard' %}">Hospital Dashboard</a>
+						</li>
+					{% elif request.user.is_doctor %}
+						<li class="nav-item">
+							<a class="nav-link {% if request.path == '/doctor/appointments/' %}active{% endif %}" aria-current="page"
+								href="{% url 'd-appointments' %}">Appointments</a>
+						</li>
+					{% endif %}
+				{% endif %}
+				<li class="nav-item">
+					<a class="nav-link {% if request.path == '/about-us/' %}active{% endif %}"
+						href="{% url 'about-us' %}">About Us</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link {% if request.path == '/services/' %}active{% endif %}"
+						href="{% url 'services' %}">Services</a>
+				</li>
+				{% comment %} <li class="nav-item">
+					<a class="nav-link {% if request.path == '/playground/play/' %}active{% endif %}"
+						href="{% url 'play' %}">Playground</a>
+				</li> {% endcomment %}
+				
+				{% if request.user.is_authenticated %}
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle {% if request.path == '/patient/{{ request.user.slug }}/profile/' %}active{% endif %}" href="#" role="button" data-bs-toggle="dropdown"
+							aria-expanded="false">
+							{{ request.user.username }}
+						</a>
+						<ul class="dropdown-menu p-1">
+							{% if request.user.is_patient %}
+								<li class="nav-item">
+									<a class="text-black nav-link {% if request.path == '/patient/{{ request.user.slug }}/profile/' %}active{% endif %}"
+										aria-current="page" href="{% url 'p-profile' request.user.slug %}">Profile</a>
+								</li>
+							{% elif request.user.is_doctor %}
+								<li class="nav-item">
+									<a class="text-black nav-link {% if request.path == '/admin/' %}active{% endif %}"
+										aria-current="page" href="{% url 'd-profile' request.user.slug %}">Profile</a>
+								</li>
+							{% elif request.user.is_superuser %}
+								<li class="nav-item">
+									<a class="text-black nav-link {% if request.path == '/admin/' %}active{% endif %}"
+										aria-current="page" href="http://127.0.0.1:8000/admin/">Admin panel</a>
+								</li>
+							{% endif %}
+							<li class="nav-item">
+								<a class="text-black nav-link"
+									href="{% url 'sign-out' %}">Sign out</a>
+							</li>
+						</ul>
+					</li>
+				{% else %}
+					<li class="nav-item">
+						<a class="nav-link {% if request.path == '/authentication/sign-in/' %}active{% endif %}"
+							href="{% url 'sign-in' %}">Sign in</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link {% if request.path == '/authentication/registration/patient/' or request.path == '/authentication/registration/hospital/' or request.path == '/authentication/registration/' %}active{% endif %}"
+							href="{% url 'registration' %}">Registration</a>
+					</li>
+				{% endif %}
+				
+			</ul>
+		</div>
+	</div>
+</nav>

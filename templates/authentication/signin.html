@@ -1,0 +1,57 @@
+{% extends "master.html" %}
+{% block title %}SignIn - Bangladesh's Smart Patient Managing & Uniquelization Service{% endblock %}
+{% load widget_tweaks %}
+{% block content %}
+
+<section class="container">
+    {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                {% if message.tags != 'success' %}
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                  </div>
+                {% else %}
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                  </div>
+                {% endif %}
+                {% endfor %}
+            </ul>
+            {% endif %}
+
+
+    <div class="my-card mt-4">
+        <div class="search-title">
+            <h4>Sign in</h4>
+        </div>
+
+        <hr class="mb-5">
+
+        <div class="sign-form rounded border">
+            <form action="" method="POST">
+                {% csrf_token %}
+    
+                    {% for field in form %}
+                    <div class="form-floating mb-3">
+                        {% render_field field class+="form-control" placeholder="{{ field.label }}" %}
+                        <label for="{{ field.html_name }}">{{ field.label }}</label>
+                    </div>
+    
+                    {% endfor %}
+    
+                    <div class="text-end">
+                        <button type="submit" class="btn btn-primary">Sign in</button>
+                        <p class="mt-3 text-center">Don't have an account?<br>
+                            <a href="{% url 'registration' %}" class="text-decoration-none text-success">Sign up here!</a>
+                        </p>
+                    </div>
+            </form>
+        </div>
+    </div>
+
+</section>
+
+{% endblock %}

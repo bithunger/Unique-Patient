@@ -1,0 +1,36 @@
+{% extends "master.html" %}
+{% block title %}Patient Detail - Bangladesh's Smart Patient Managing & Uniquelization Service{% endblock %}
+{% load widget_tweaks %}
+{% block content %}
+
+<section class="container h-admin">
+    {% include "hospitals/admin_sidenav.html" %}
+    
+    <div class="h-admin-content">
+        <div class="my-card">
+            <div class="search-title">
+                <h4>Patient Detail</h4>
+                <a class="text-black" href="{% url 'appointments' %}"><i class="fa-solid fa-arrow-left-long"></i> Go back</a>
+            </div>
+            <hr class="mb-5">
+
+            <div>
+                <div class="row g-4">
+                    <div class="col-md-6">
+                        <img src="/media/{{ patient.patient.profile_image }}" alt="{{ patient.username }}">
+                    </div>
+                    <div class="col-md-6">
+                        <h5>Patient name- {{ patient.first_name }} {{ patient.last_name }}</h5>
+                        <h6>DOB- {{ patient.patient.dob }}</h6>
+                        <h6>Address- {{ patient.patient.address }}</h6>
+                        <h6>Contact- {{ patient.patient.telephone_number }}</h6>
+                    </div>
+                </div>
+                
+            </div>
+
+        </div>
+
+</section>
+
+{% endblock %}

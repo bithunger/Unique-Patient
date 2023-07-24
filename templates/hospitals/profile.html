@@ -1,0 +1,84 @@
+{% extends "master.html" %}
+{% block title %}Hospital Profile - Bangladesh's Smart Patient Managing & Uniquelization Service{% endblock %}
+
+{% block content %}
+<section class="container d-flex">
+	{% include "hospitals/admin_sidenav.html" %}
+
+	<div class="h-admin-content">
+		<div class="my-card">
+			<h4>Hospital profile</h4>
+			<hr class="mb-5">
+
+			<div class="d-flex justify-content-center">
+				<div class="profile">
+					<form>
+						<div class="mb-3 text-center">
+							{% if hospital.hospital.hospital_image %}
+							<img class="profile-img rounded-circle mb-3"src="/media/{{ hospital.hospital.hospital_image }}" alt="{{ hospital.username }}">
+							{% else %}
+							<img class="profile-img rounded-circle mb-3"src="/media/images/profile.jpg" alt="Patient image"><br>
+							{% endif %}
+						</div>
+						<div class="form-floating mb-3">
+							<input disabled type="text" name="username" class="form-control" placeholder="username" value="{{ hospital.username }}">
+							<label for="username">Username</label>
+						</div>
+						<div class="form-floating mb-3">
+							<input disabled type="text" name="first_name" class="form-control" placeholder="first_name" value="{{ hospital.first_name }}">
+							<label for="first_name">First name</label>
+						</div>
+						<div class="form-floating mb-3">
+							<input disabled type="text" name="last_name" class="form-control" placeholder="last_name" value="{{ hospital.last_name }}">
+							<label for="last_name">Last name</label>
+						</div>
+						<div class="form-floating mb-3">
+							<input disabled type="email" name="email" class="form-control" placeholder="email" value="{{ hospital.email }}">
+							<label for="email">Email</label>
+						</div>
+						<div class="form-floating mb-3">
+							<input disabled type="name" name="name" class="form-control" placeholder="name" value="{{ hospital.hospital.hospital_name }}">
+							<label for="name">Hospital name</label>
+						</div>
+						<div class="form-floating mb-3">
+							<input disabled type="text" name="establish" class="form-control" placeholder="establish" value="{{ hospital.hospital.establish }}">
+							<label for="establish">Stablish Date (d-m-y)</label>
+						</div>
+						<div class="form-floating mb-3">
+							<input disabled type="text" name="mobile" class="form-control" placeholder="mobile" value="{{ hospital.hospital.telephone_number }}">
+							<label for="mobile">Contact number</label>
+						</div>
+						<div class="form-floating mb-3">
+							<textarea disabled name="about" class="form-control" cols="20" rows="20" placeholder="about">{{ hospital.hospital.hospital_about }}</textarea>
+							<label for="about">About Hospital</label>
+						</div>
+						<div class="form-floating mb-3">
+							<textarea disabled name="address" class="form-control" cols="20" rows="20" placeholder="address">{{ hospital.hospital.address }}</textarea>
+							<label for="address">Address</label>
+						</div>
+						<div class="form-floating mb-3">
+							<input disabled type="text" name="map" class="form-control" placeholder="map" value="{{ hospital.hospital.hospital_map}}">
+							<label for="map">Map</label>
+						</div>
+						<div class="row g-3 mb-3">
+							<div class="col form-floating mb-3">
+								<input disabled type="text" name="fb" class="form-control" placeholder="fb" value="{{ hospital.hospital.hospital_fb }}">
+								<label for="fb">Facebook Link</label>
+							</div>
+							<div class="col form-floating mb-3">
+								<input disabled type="text" name="web" class="form-control" placeholder="web" value="{{ hospital.hospital.hospital_web }}">
+								<label for="web">Web-site Link</label>
+							</div>
+						</div>
+					</form>
+					<div class="text-end">
+						<a href="{% url 'hospital-edit-profile' hospital.slug %}"><button class="btn btn-primary">Edit</button></a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</section>
+
+{% endblock %}

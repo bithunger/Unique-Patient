@@ -1,0 +1,66 @@
+{% extends "master.html" %}
+{% block title %}Make Appointments - Bangladesh's Smart Patient Managing & Uniquelization Service{% endblock %}
+
+{% block content %}
+
+<section class="container">
+
+    <div class="my-card mt-4">
+        <div class="search-title">
+            <h4>Confirm appointment</h4>
+        </div>
+        <hr class="mb-5">
+
+        <div class="sign-form rounded border">
+            <form action="" method="POST">
+                {% csrf_token %}
+
+                <div class="form-floating mb-3">
+                    <input type="text" name="p" class="form-control" placeholder="patient" value="{{ request.user.first_name }} {{ request.user.last_name }}">
+                    <input hidden type="text" name="patient" value="{{ request.user.id }}">
+                    <label for="patient">Patient</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="text" name="h" class="form-control" placeholder="hospital" value="{{ hospital.hospital_name }}">
+                    <input hidden type="text" name="hospital" value="{{ hospital.user.id }}">
+                    <label for="hospital">Hospital</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="text" name="d" class="form-control" placeholder="doctor" value="{{ doctor.my_doctor.user.first_name }} {{ doctor.my_doctor.user.last_name }}">
+                    <input hidden type="text" name="doctor" value="{{ doctor.my_doctor.user.id }}">
+                    <label for="doctor">Doctor</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <select name="day" class="form-select form-control form-select-sm" aria-label=".form-select-sm example">
+                        <option selected>None</option>
+                        {% if times %}
+                        {% for time in times %}
+                        <option value="{{ time.day }}">{{ time.day }} - {{ time.time_from }} to {{ time.time_to }}</option>
+                        {% endfor %}
+                        {% else %}
+                        {% endif %}
+                    </select>
+                    <label for="day">Select schedule</label>
+                </div>
+                {% comment %} <div class="mb-3">
+                    <select class="form-select form-control form-select-sm" aria-label=".form-select-sm example">
+                        <option selected>Select schedule</option>
+                        {% if times %}
+                        {% for time in times %}
+                        <option value="{{ time.day }} {{ time.time_from }} to {{ time.time_to }}">{{ time.day }} {{ time.time_from }} to {{ time.time_to }}</option>
+                        {% endfor %}
+                        {% else %}
+                        {% endif %}
+                    </select>
+                </div> {% endcomment %}
+
+                <div class="text-end">
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</section>
+
+{% endblock %}

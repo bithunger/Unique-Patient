@@ -1,0 +1,29 @@
+
+    <div class="sidebar">
+        <nav class="collapse d-lg-block">
+            <div class="list-group list-group-flush mx-3 pb-4 pt-4">
+                <a href="{% url 'dashboard' %}" class="list-group-item {% if request.path == '/hospital/dashboard/' %}active{% endif %}">
+                    <i class="fas fa-tachometer-alt fa-fw me-3"></i><span>Dashboard</span>
+                </a>
+
+                <a href="{% url 'add-doctor' %}" class="list-group-item {% if request.path == '/hospital/add-doctor/' %}active{% endif %}">
+                    <i class="fa-solid fa-circle-plus fa-fw me-3"></i><span>Add Doctor</span>
+                </a>
+                <a href="{% url 'doctor-list' %}" class="list-group-item {% if request.path == '/hospital/doctor-list/' %}active{% endif %}">
+                    <i class="fa-solid fa-user-doctor fa-fw me-3"></i><span>Doctor list</span>
+                </a>
+                <a href="{% url 'patient-list' %}" class="list-group-item {% if request.path == '/hospital/patient-list/' %}active{% endif %}">
+                    <i class="fa-sharp fa-solid fa-hospital-user fa-fw me-3"></i><span>Patient list</span>
+                </a>
+                <a href="{% url 'h-make-appointment' %}" class="list-group-item {% if request.path == '/hospital/make-appointment/' %}active{% endif %}">
+                    <i class="fa-solid fa-calendar-check fa-fw me-3"></i><span>Make Appointment</span>
+                </a>
+                <a href="{% url 'appointments' %}" class="list-group-item {% if request.path == '/hospital/appointments/' %}active{% endif %}">
+                    <i class="fa-solid fa-calendar-check fa-fw me-3"></i><span>Appointments</span>
+                </a>
+                <a href="{% url 'profile' request.user.slug %}" class="list-group-item {% if request.path == '/hospital/{{ request.user.slug }}/profile/' %}active{% endif %}">
+                    <i class="fa-solid fa-user fa-fw me-3"></i><span>Profile</span>
+                </a>
+              </div>
+        </nav>
+    </div>

@@ -1,0 +1,74 @@
+{% extends "master.html" %}
+{% block title %}Patient diseases - Bangladesh's Smart Patient Managing & Uniquelization Service{% endblock %}
+
+{% block content %}
+
+<section class="container">
+
+    <div class="my-card mt-4">
+        <div class="search-title">
+            <h4>Diseases</h4>
+            <form class="d-flex">
+                <input class="form-control me-2" type="search" placeholder="Disease name" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+        </div>
+        <hr class="mb-5">
+
+        {% comment %} {% for appointment in appointments %}
+        <div class="doctor-search">
+            <ul class="list-group">
+                <a href="{% url 'p-appointment-detail' %}" class="rounded">
+                    <li class="list-group-item d-flex align-items-start">
+                        <span class="badge bg-primary rounded-pill fs-6">{{ forloop.counter }} - {{ appointment.id }}</span>
+                        <div>
+                            <div class="ms-5">
+                                <div class="fw-bold fs-6">Hospital: {{ appointment.hospital.hospital.hospital_name }}</div>
+                                <div class="fw-bold fs-6">Doctor: {{ appointment.doctor_name }}</div>
+                                {{ appointment.doctor_specialty }}
+                            </div>
+                            <div class="ms-5">
+                                <div>Friday - 09-40pm</div>
+                            </div>
+                        </div>
+                    </li>
+                </a>
+            </ul>
+        </div>
+        {% endfor %} {% endcomment %}
+
+
+        <div class=" my-table">
+            <table class="table table-borderless">
+                <thead>
+                  <tr>
+                    <th class="col-md-2">S/N.</th>
+                    <th class="col-md-4">Disease</th>
+                    <th class="col-md-6">Diseanse Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    {% if diseases %}
+                    {% for disease in diseases %}
+                    <tr>
+                        <td scope="row">{{ forloop.counter }}</td>
+                        <td><a class="text-black" href="{% url 'p-disease-detail' disease.id %}">{{ disease.disease_name }}</a></td>
+                        <td>{{ disease.disease_des }}</td>
+                    </tr>
+                    {% endfor %}
+                    {% else %}
+                    <tr>
+                        <td>
+                            No disease found
+                        </td>
+                    </tr>
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

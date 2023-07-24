@@ -1,0 +1,21 @@
+{% extends "master.html" %}
+{% block title %}Registration - Bangladesh's Smart Patient Managing & Uniquelization Service{% endblock %}
+
+{% block content %}
+
+<section class="container">
+
+    <div class="my-card mt-4 mb-3">
+        <h4>Register as</h4>
+        <hr class="mb-5">
+
+        <div class="text-center">
+            <a href="{% url 'registration-patient' %}"><button class="btn btn-primary me-5">Patient</button></a>
+            <a href="{% url 'registration-hospital' %}"><button class="btn btn-primary me-5">Hospital</button></a>
+            <a href="{% url 'registration-doctor' %}"><button class="btn btn-primary me-5">Doctor</button></a>
+        </div>
+    </div>
+
+</section>
+
+{% endblock %}

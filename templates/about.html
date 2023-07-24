@@ -1,0 +1,72 @@
+{% extends 'master.html' %}
+{% block title %}
+About Us - Bangladesh's Smart Patient Managing & Uniquelization Service
+{% endblock %}
+
+{% block content %}
+<section class="container">
+    <div class="my-card mt-4">
+        <div class="text-center">
+            <h2 class="">Our Motivation</h2>
+        </div>
+
+        <div>
+            <div class="about-des">
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat iusto, ducimus error tempore
+                    quaerat, atque architecto assumenda pariatur voluptate magnam, ea dolores corrupti incidunt sit
+                    molestias illo libero. Accusantium dolorum dolor excepturi eos nulla vero reiciendis, perferendis
+                    animi quo ad iusto voluptates, id ab quia quisquam vitae magni cum beatae autem expedita placeat
+                    provident? Quas facere eaque ea inventore praesentium iusto amet eum expedita quos at perferendis
+                    distinctio, fuga asperiores tempore officia? Ad cum beatae vel facere magnam ut porro rem et
+                    impedit, aperiam repellendus non. Asperiores animi adipisci unde laborum corporis vero. Culpa nam
+                    eos soluta expedita quas eum iusto voluptate similique harum excepturi nisi tempora velit inventore
+                    id dolorum consectetur praesentium minima, deserunt dolore sint earum mollitia magnam rerum!
+                    Asperiores cum molestias dolorem, ratione reiciendis corrupti, excepturi architecto voluptatum
+                    maxime aliquam, nobis itaque qui mollitia sit repellat.</p>
+            </div>
+            
+            <div class="my-card text-center mt-5">
+                <div class="partners">
+                    <h3 class="mb-5">Our Team</h3>
+                    <div class="partners-logo">
+                        <img class="rounded-circle" src="/media/images/hospital.jpg" alt="">
+                        <img class="rounded-circle" src="/media/images/hospital.jpg" alt="">
+                        <img class="rounded-circle" src="/media/images/hospital.jpg" alt="">
+                    </div>
+                </div>
+            </div>
+
+            <div class="my-card mt-5 d-flex justify-content-center">
+                <div class="contact">
+                    <div class="text-center">
+                        <h3 class="mb-5">Contact Us</h3>
+                    </div>
+                    <div class="contact-us">
+                        <form>
+                            <div class="row name-flex">
+                                <div class="col mb-3">
+                                    <div class="form-floating">
+                                        <input name="name" type="text" class="form-control" id="name" placeholder="Name">
+                                        <label for="name">Name</label>
+                                    </div>
+                                </div>
+                                <div class="col mb-3">
+                                    <div class="form-floating">
+                                        <input name="email" type="email" class="form-control" id="email" placeholder="Email">
+                                        <label for="email">Email address</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <textarea class="form-control" placeholder="Leave a comment here" id="comments" style="height: 100px"></textarea>
+                                <label for="comments">Comments</label>
+                            </div>
+                            <button type="submit" class="rounded my-button">Send</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

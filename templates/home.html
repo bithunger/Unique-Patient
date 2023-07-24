@@ -1,0 +1,102 @@
+{% extends "master.html" %}
+{% block title %}Bangladesh's Smart Patient Managing & Uniquelization Service{% endblock %}
+
+{% block content %}
+
+<section>
+    {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                {% if message.tags != 'success' %}
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                  </div>
+                {% else %}
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                  </div>
+                {% endif %}
+                {% endfor %}
+            </ul>
+        {% endif %}
+    <div class="company-moto">
+        <div class="container text-center lh-1">
+            Bangladesh's<br><span class="d">Smart Patient Managing<br>& Uniquelization Service</span>
+        </div>
+    </div>
+
+    <div class="total-count">
+        <div class="text-center count">
+            Total number of Patient's
+            <h2>{{ user }}</h2>
+        </div>
+        <div class="text-center count">
+            Total number of Hospitals's
+            <h2>{{ hospital }}</h2>
+        </div>
+        <div class="text-center count">
+            Total number of Doctors's
+            <h2>{{ doctor }}</h2>
+        </div>
+    </div>
+
+    <div class="my-card text-center mt-5">
+        <div class="appointment">
+            <h3 class="mb-4">A One-Stop Solution for Individual Patient Diseases History</h3>
+            <img src="media/images/patient.png" alt="Hospital"><br>
+            {% if request.user.is_patient %}
+            <a href="{% url 'make-appointment' %}"><button class="rounded">Make Appointment</button></a> 
+            {% elif request.user.is_hospital %}
+            <a href="{% url 'h-make-appointment' %}"><button class="rounded">Make Appointment</button></a> 
+            {% endif %}           
+        </div>
+    </div>
+
+    <div class="my-card partners mt-4 text-center">
+        <div class="container">
+            <h3 class="mb-5">Our Trusted Hospitals</h3>
+            <div class="partners-logo">
+                <img class="rounded-circle" src="media/images/hospital.jpg" alt="">
+                <img class="rounded-circle" src="media/images/hospital.jpg" alt="">
+                <img class="rounded-circle" src="media/images/hospital.jpg" alt="">
+            </div>
+        </div>
+    </div>
+
+    <div class="my-card mt-4 mb-3 container d-flex justify-content-center">
+        <div class="contact">
+            <div class="text-center">
+                <h3 class="mb-5">Contact Us</h3>
+            </div>
+            <div class="contact-us">
+                <form method="POST" action="{% url 'send-mail' %}">
+                    {% csrf_token %}
+                    <div class="row name-flex">
+                        <div class="col mb-3">
+                            <div class="form-floating">
+                                <input name="name" type="text" class="form-control" id="name" placeholder="Name">
+                                <label for="name">Name</label>
+                            </div>
+                        </div>
+                        <div class="col mb-3">
+                            <div class="form-floating">
+                                <input name="email" type="email" class="form-control" id="email" placeholder="Email">
+                                <label for="email">Email address</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <textarea name="comment" class="form-control" placeholder="Leave a comment here" id="comment" style="height: 100px"></textarea>
+                        <label for="comment">Comment</label>
+                    </div>
+                    <button type="submit" class="rounded my-button">Send</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+{% endblock %}

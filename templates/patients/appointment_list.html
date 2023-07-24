@@ -1,0 +1,104 @@
+{% extends "master.html" %}
+{% block title %}Appointment List - Bangladesh's Smart Patient Managing & Uniquelization Service{% endblock %}
+
+{% block content %}
+
+<section class="container">
+
+    <div class="my-card mt-4">
+        <div class="search-title">
+            <h4>Appointment List</h4>
+            <form class="d-flex">
+                <input class="form-control me-2" type="search" placeholder="Hospital or Doctor" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+        </div>
+        <hr class="mb-5">
+
+        {% comment %} {% for appointment in appointments %}
+        <div class="doctor-search">
+            <ul class="list-group">
+                <a href="{% url 'p-appointment-detail' %}" class="rounded">
+                    <li class="list-group-item d-flex align-items-start">
+                        <span class="badge bg-primary rounded-pill fs-6">{{ forloop.counter }} - {{ appointment.id }}</span>
+                        <div>
+                            <div class="ms-5">
+                                <div class="fw-bold fs-6">Hospital: {{ appointment.hospital.hospital.hospital_name }}</div>
+                                <div class="fw-bold fs-6">Doctor: {{ appointment.doctor_name }}</div>
+                                {{ appointment.doctor_specialty }}
+                            </div>
+                            <div class="ms-5">
+                                <div>Friday - 09-40pm</div>
+                            </div>
+                        </div>
+                    </li>
+                </a>
+            </ul>
+        </div>
+        {% endfor %} {% endcomment %}
+
+
+        <div class=" my-table">
+            <table class="table table-borderless">
+                <thead>
+                  <tr>
+                    <th class="col-md-1">S/N.</th>
+                    <th class="col-md-2">Hospital</th>
+                    <th class="col-md-5">Doctor</th>
+                    <th class="col-md-2">Time</th>
+                    <th class="col-md-2">Status</th>
+                  </tr>
+                </thead>
+                
+                <tbody>
+                    {% if appointments %}
+                            {% for appointment in appointments %}
+                            {% if appointment.status == False %}
+                            <tr>
+                                <td scope="row">{{ forloop.counter }}</td>
+                                <td><span class="fw-bold">{{ appointment.hospital.hospital_name }}</span></td>
+                                <td>
+                                    <span class="fw-bold">{{ appointment.doctor.user.first_name }} {{ appointment.doctor.user.last_name }}</span>
+                                    <p class="pe-5"><span class="fw-bold">Specialty:</span> {{ appointment.doctor.specialty }}</p>
+                                </td>
+                                <td><span class="fw-bold">{{ appointment.day }} - {{ appointment.time }}</span></td>
+                                <td>
+                                    <span class="text-center bg-info text-white rounded p-2">Unvisited</span>
+                                    <a href="{% url 'p-appointment-delete' appointment.id %}">
+                                        <span class="text-center bg-danger text-white rounded p-2"><i class="fa-solid fa-trash"></i></span>
+                                    </a>
+                                </td>
+                            </tr>
+                            {% endif %}
+                            {% endfor %}
+
+                            {% for appointment in appointments %}
+                            {% if appointment.status == True %}
+                            <tr>
+                                <td scope="row">{{ forloop.counter }}</td>
+                                <td><span class="fw-bold">{{ appointment.hospital.hospital_name }}</span></td>
+                                <td>
+                                    <span class="fw-bold">{{ appointment.doctor.user.first_name }} {{ appointment.doctor.user.last_name }}</span>
+                                    <p class="pe-5"><span class="fw-bold">Specialty:</span> {{ appointment.doctor.specialty }}</p>
+                                </td>
+                                <td><span class="fw-bold">{{ appointment.day }} - {{ appointment.time }}</span></td>
+                                <td><span class="text-center bg-success text-white rounded-pill p-2"><i class="fa-solid fa-circle-check"></i> Visited</span></td>
+                            </tr>
+                            {% endif %}
+                            {% endfor %}
+                            {% else %}
+                            <tr>
+                                <td>
+                                    <p>No appoinment found</p>
+                                </td>
+                            </tr>
+                            {% endif %}
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}
