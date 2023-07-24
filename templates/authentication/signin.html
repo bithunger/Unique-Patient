@@ -4,7 +4,7 @@
 {% block content %}
 
 <section class="container">
-    {% if messages %}
+        {% if messages %}
             <ul class="messages">
                 {% for message in messages %}
                 {% if message.tags != 'success' %}
@@ -20,7 +20,7 @@
                 {% endif %}
                 {% endfor %}
             </ul>
-            {% endif %}
+        {% endif %}
 
 
     <div class="my-card mt-4">

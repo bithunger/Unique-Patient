@@ -21,7 +21,8 @@
                 <a href="{% url 'appointments' %}" class="list-group-item {% if request.path == '/hospital/appointments/' %}active{% endif %}">
                     <i class="fa-solid fa-calendar-check fa-fw me-3"></i><span>Appointments</span>
                 </a>
-                <a href="{% url 'profile' request.user.slug %}" class="list-group-item {% if request.path == '/hospital/{{ request.user.slug }}/profile/' %}active{% endif %}">
+                {% url 'profile' request.user.slug as profile %}
+                <a href="{% url 'profile' request.user.slug %}" class="list-group-item {% if request.path == profile %}active{% endif %}">
                     <i class="fa-solid fa-user fa-fw me-3"></i><span>Profile</span>
                 </a>
               </div>

@@ -1,6 +1,5 @@
 from django.shortcuts import render, HttpResponse, redirect
-from django.http import Http404, HttpResponse, JsonResponse
-from django.contrib.auth import login as auth_login, authenticate, logout
+from django.contrib.auth import login as auth_login, logout
 from django.views.generic import CreateView, View
 from .forms import RegistrationForm, PatientRegisterForm, HospitalRegisterForm, DoctorRegisterForm
 from authentication.models import User, Contact
@@ -26,18 +25,35 @@ class PatientSignUpView(CreateView):
     p_form = PatientRegisterForm
     template_name = 'authentication/registration.html'
 
-    def form_valid(self, form):
-        user = form.save()
-        user.is_patient = True
-        user.save()
-        dob = self.request.POST['dob']
-        gender = self.request.POST['gender']
-        telephone_number = self.request.POST['telephone_number']
-        print(telephone_number)
-        patient = Patient.objects.create(
-            user=user, dob=dob, gender=gender, telephone_number=telephone_number)
-        auth_login(self.request, user)
-        return redirect("home")
+    def post(self, request):
+        if request.POST:
+            username = self.request.POST['username']
+            password1 = self.request.POST['password1']
+            password2 = self.request.POST['password2']
+            email = self.request.POST['email']
+            first_name = self.request.POST['first_name']
+            last_name = self.request.POST['last_name']
+            if User.objects.filter(username=username).exists():
+                messages.error(request, 'Username already exist')
+                return redirect('registration-patient')
+            elif password1!=password2:
+                messages.error(request, "Password didn't match")
+                return redirect('registration-patient')
+            elif password1==password2 and len(password1)<8:
+                messages.error(request, "Password mus be 8 characters")
+                return redirect('registration-patient')
+            user = User.objects.create(first_name=first_name, last_name=last_name, username=username, email=email, password=password1)
+            user.is_patient = True
+            user.save()
+            
+            dob = self.request.POST['dob']
+            gender = self.request.POST['gender']    
+            telephone_number = self.request.POST['telephone_number']
+            Patient.objects.create(user=user, dob=dob, gender=gender, telephone_number=telephone_number)
+            auth_login(self.request, user)
+            return redirect("home")
+        
+        return redirect('registration-patient')
 
     def get(self, request, *args, **kwargs):
         rg_form = self.form_class(**self.get_form_kwargs())
@@ -51,19 +67,38 @@ class HospitalSignUpView(CreateView):
     p_form = HospitalRegisterForm
     template_name = 'authentication/registration.html'
 
-    def form_valid(self, form):
-        user = form.save()
-        user.is_hospital = True
-        user.save()
-        hospital_name = self.request.POST['hospital_name']
-        establish = self.request.POST['establish']
-        telephone_number = self.request.POST['telephone_number']
-        address = self.request.POST['address']
-        hospital_map = self.request.POST['hospital_map']
-        hospital = Hospital.objects.create(user=user, hospital_name=hospital_name, establish=establish,
-                                           telephone_number=telephone_number, address=address, hospital_map=hospital_map)
-        auth_login(self.request, user)
-        return redirect("home")
+    def post(self, request):
+        if request.POST:
+            username = self.request.POST['username']
+            password1 = self.request.POST['password1']
+            password2 = self.request.POST['password2']
+            email = self.request.POST['email']
+            first_name = self.request.POST['first_name']
+            last_name = self.request.POST['last_name']
+            if User.objects.filter(username=username).exists():
+                messages.error(request, 'Username already exist')
+                return redirect('registration-hospital')
+            elif password1!=password2:
+                messages.error(request, "Password didn't match")
+                return redirect('registration-hospital')
+            elif password1==password2 and len(password1)<8:
+                messages.error(request, "Password mus be 8 characters")
+                return redirect('registration-hospital')
+            user = User.objects.create(first_name=first_name, last_name=last_name, username=username, email=email, password=password1)
+            user.is_hospital = True
+            user.save()
+            
+            hospital_name = self.request.POST['hospital_name']
+            establish = self.request.POST['establish']
+            telephone_number = self.request.POST['telephone_number']
+            address = self.request.POST['address']
+            hospital_map = self.request.POST['hospital_map']
+            hospital = Hospital.objects.create(user=user, hospital_name=hospital_name, establish=establish,
+                                            telephone_number=telephone_number, address=address, hospital_map=hospital_map)
+            auth_login(self.request, user)
+            return redirect("home")
+                
+        return redirect('registration-patient')
 
     def get(self, request, *args, **kwargs):
         rg_form = self.form_class(**self.get_form_kwargs())
@@ -77,19 +112,38 @@ class DoctorSignUpView(CreateView):
     p_form = DoctorRegisterForm
     template_name = 'authentication/registration.html'
 
-    def form_valid(self, form):
-        user = form.save()
-        user.is_doctor = True
-        user.save()
+    def post(self, request):
+        if request.POST:
+            username = self.request.POST['username']
+            password1 = self.request.POST['password1']
+            password2 = self.request.POST['password2']
+            email = self.request.POST['email']
+            first_name = self.request.POST['first_name']
+            last_name = self.request.POST['last_name']
+            if User.objects.filter(username=username).exists():
+                messages.error(request, 'Username already exist')
+                return redirect('registration-doctor')
+            elif password1!=password2:
+                messages.error(request, "Password didn't match")
+                return redirect('registration-doctor')
+            elif password1==password2 and len(password1)<8:
+                messages.error(request, "Password mus be 8 characters")
+                return redirect('registration-doctor')
+            user = User.objects.create(first_name=first_name, last_name=last_name, username=username, email=email, password=password1)
+            user.is_doctor = True
+            user.save()
 
-        gender = self.request.POST['gender']
-        specialty = self.request.POST['specialty']
-        qualification = self.request.POST['qualification']
-        telephone_number = self.request.POST['telephone_number']
-        doctor = Doctor.objects.create(user=user, gender=gender, specialty=specialty,
-                                       qualification=qualification, telephone_number=telephone_number)
-        auth_login(self.request, user)
-        return redirect("home")
+            gender = self.request.POST['gender']
+            specialty = self.request.POST['specialty']
+            qualification = self.request.POST['qualification']
+            telephone_number = self.request.POST['telephone_number']
+            doctor = Doctor.objects.create(user=user, gender=gender, specialty=specialty,
+                                        qualification=qualification, telephone_number=telephone_number)
+            auth_login(self.request, user)
+            return redirect("home")
+        
+        return redirect('registration-patient')
+
 
     def get(self, request, *args, **kwargs):
         rg_form = self.form_class(**self.get_form_kwargs())
@@ -107,19 +161,14 @@ class SignIn(View):
 
     def post(self, request):
         if request.POST:
-            form = self.form_class(request, data=request.POST)
-            if form.is_valid():
-                username = form.cleaned_data.get('username')
-                password = form.cleaned_data.get('password')
-
-                user = authenticate(username=username, password=password)
-
-                if user is not None:
-                    auth_login(request, user)
-                    messages.success(request, 'Sign in Successfully!')
-                    return redirect('home')
-                else:
-                    messages.error(request, 'Error')
+            username = self.request.POST['username']
+            password = self.request.POST['password']
+            
+            if User.objects.filter(username=username, password=password).exists():
+                user = User.objects.get(username=username, password=password)
+                auth_login(request, user)
+                messages.success(request, 'Sign in Successfully!')
+                return redirect('home')
             else:
                 messages.error(request, 'Bad Credential!')
 
@@ -157,3 +206,21 @@ class SendMailView(View):
 
             messages.success(request, "Your Message was sent successfully")
             return redirect('home')
+
+
+
+
+# if form.is_valid():
+#                 username = form.cleaned_data.get('username')
+#                 password = form.cleaned_data.get('password')
+
+#                 user = authenticate(username=username, password=password)
+
+#                 if user is not None:
+#                     auth_login(request, user)
+#                     messages.success(request, 'Sign in Successfully!')
+#                     return redirect('home')
+#                 else:
+#                     messages.error(request, 'Error')
+#             else:
+#                 messages.error(request, 'Bad Credential!')
