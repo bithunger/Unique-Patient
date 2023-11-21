@@ -25,6 +25,7 @@ urlpatterns = [
     path('doctor/', include('doctors.urls')),
     path('', include('authority.urls')),
     # path('playground/', include('playground.urls')),
+    path('api/', include('api.urls')),
     path('admin/', admin.site.urls),
     path("__debug__/", include("debug_toolbar.urls")),
 ]
